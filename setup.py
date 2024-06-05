@@ -10,7 +10,7 @@ setup(
     author='Peipei Hao',
     author_email='peipei.hao@colorado.edu',
     description='Fitting tools for the temperature-dependent resistivity data',
-    url='https://github.com/yourusername/my_package',
+    url='https://github.com/peipeihao/RTfitting2',
     classifiers=[
         'Programming Language :: Python :: 3',
         'License :: OSI Approved :: MIT License',
