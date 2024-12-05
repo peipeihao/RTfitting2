@@ -2,6 +2,7 @@ import numpy as np
 import latex
 import pandas as pd
 import matplotlib.pyplot as plt
+from fit_models import Quadra_model, PLL_model, Linear_model
 import warnings
 import inspect
 
@@ -96,6 +97,22 @@ class RT:
     # 1. Loading and cropping the RT data
     def load_RT(self, file):
         raw_data = np.loadtxt(file, skiprows=1)
+        T_raw = raw_data[:, 0]
+        R_raw = raw_data[:, 1]
+        self.Tdata, self.Rdata = RT.sort_RT(T_raw, R_raw)
+        print(f"The shape of T_data and R_data is: {self.Tdata.shape}, {self.Rdata.shape}")
+        print(f"Data of {self.type} p={self.doping} loaded successfully!")
+
+    def load_RT_Bi2201(self, file):
+        raw_data = np.loadtxt(file, skiprows=1, delimiter=",")
+        T_raw = raw_data[:, 0]
+        R_raw = raw_data[:, 1]
+        self.Tdata, self.Rdata = RT.sort_RT(T_raw, R_raw)
+        print(f"The shape of T_data and R_data is: {self.Tdata.shape}, {self.Rdata.shape}")
+        print(f"Data of {self.type} p={self.doping} loaded successfully!")
+
+    def load_RT_LSCO(self, file):
+        raw_data = np.loadtxt(file, skiprows=0, delimiter=",")
         T_raw = raw_data[:, 0]
         R_raw = raw_data[:, 1]
         self.Tdata, self.Rdata = RT.sort_RT(T_raw, R_raw)
@@ -234,6 +251,15 @@ class RT:
         results = self.results
         T_index = RT.nearest_index(temperatures, T)
         return results[T_index]
+
+    def get_y(self, T):
+        '''
+        returns the ModelResult object for fit at T
+        '''
+        Rdata = self.Rdata
+        temperatures = self.temperatures
+        T_index = RT.nearest_index(temperatures, T)
+        return Rdata[T_index]
 
     def get_Tdata(self, T):
         '''

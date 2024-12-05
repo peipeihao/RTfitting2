@@ -2,10 +2,10 @@ from setuptools import setup, find_packages
 
 setup(
     name='RTfitting',
-    version='0.1.0',
+    version='1.0.1',
     packages=find_packages(),
     install_requires=[
-        'numpy', 'pandas', 'latex', 'matplotlib'
+        'numpy', 'pandas', 'latex', 'matplotlib', 'lmfit'
     ],
     author='Peipei Hao',
     author_email='peipei.hao@colorado.edu',
